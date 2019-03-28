@@ -1,9 +1,41 @@
+globals [button-erase? button-make?]
+
 to setup
   clear-all
-  ask patches [ if random-float 1.0 < 0.04 [ set pcolor pink] ]
-  ask patches with [pcolor = pink] [ ask patches in-radius random-float 3 [ set pcolor pink ] ]
-  ask patches with [count neighbors4 with [pcolor = pink] = 4] [ set pcolor pink]
+  ;;ask patches [ if random-float 1.0 < 0.04 [ set pcolor pink] ]
+  ;;ask patches with [pcolor = pink] [ ask patches in-radius random-float 3 [ set pcolor pink ] ]
+  ;;ask patches with [count neighbors4 with [pcolor = pink] = 4] [ set pcolor pink]
+  set button-erase? false
+  set button-make? false
   reset-ticks
+end
+
+to clear-display
+  clear-all
+  set button-make? false
+  set button-erase? false
+  reset-ticks
+end
+
+to erase
+  set button-erase? true
+  if button-make? [ set button-make? false stop ]
+  if mouse-down? [
+    ask patch mouse-xcor mouse-ycor [ set pcolor black ]
+    display
+  ]
+
+end
+
+
+to make-obstacle
+  set button-make? true
+  if button-erase? [ set button-erase? false stop ]
+  if mouse-down? [
+    ask patch mouse-xcor mouse-ycor [ set pcolor red ]
+    display
+  ]
+
 end
 
 to go
@@ -33,8 +65,8 @@ end
 GRAPHICS-WINDOW
 210
 10
-647
-448
+1063
+864
 -1
 -1
 13.0
@@ -47,10 +79,10 @@ GRAPHICS-WINDOW
 1
 1
 1
--16
-16
--16
-16
+-32
+32
+-32
+32
 0
 0
 1
@@ -58,10 +90,10 @@ ticks
 30.0
 
 BUTTON
-26
-46
-89
-79
+27
+77
+90
+110
 setup
 setup
 NIL
@@ -81,6 +113,57 @@ BUTTON
 111
 go
 go
+T
+1
+T
+OBSERVER
+NIL
+NIL
+NIL
+NIL
+1
+
+BUTTON
+59
+158
+144
+191
+make wall
+make-obstacle
+T
+1
+T
+OBSERVER
+NIL
+NIL
+NIL
+NIL
+1
+
+BUTTON
+64
+286
+127
+319
+clear
+clear-display
+NIL
+1
+T
+OBSERVER
+NIL
+NIL
+NIL
+NIL
+1
+
+BUTTON
+91
+228
+154
+261
+erase
+erase
 T
 1
 T
