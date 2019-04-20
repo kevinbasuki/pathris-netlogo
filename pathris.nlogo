@@ -5,6 +5,9 @@ to setup
   ;;ask patches [ if random-float 1.0 < 0.04 [ set pcolor pink] ]
   ;;ask patches with [pcolor = pink] [ ask patches in-radius random-float 3 [ set pcolor pink ] ]
   ;;ask patches with [count neighbors4 with [pcolor = pink] = 4] [ set pcolor pink]
+  clear-all
+  create-turtles 4 [ set shape "l" set size 3 setxy random-xcor random-ycor set heading 0]  ;;Create turtles with shape l, size 3, random position, and facing 0.
+
   set button-erase? false
   set button-make? false
   reset-ticks
@@ -27,16 +30,23 @@ to erase
 
 end
 
-
 to make-obstacle
   set button-make? true
   if button-erase? [ set button-erase? false stop ]
   if mouse-down? [
-    ask patch mouse-xcor mouse-ycor [ set pcolor red ]
+    ask patch mouse-xcor mouse-ycor [ set pcolor white ]
     display
   ]
 
 end
+
+to make-goal
+  if mouse-down? [
+    ask patch mouse-xcor mouse-ycor [ set pcolor red ]
+    display
+  ]
+end
+
 
 to go
   ask turtles [
@@ -63,13 +73,13 @@ to-report absolute-value [number]
 end
 @#$#@#$#@
 GRAPHICS-WINDOW
-210
-10
-1063
-864
+297
+26
+695
+425
 -1
 -1
-13.0
+10.0
 1
 10
 1
@@ -79,20 +89,20 @@ GRAPHICS-WINDOW
 1
 1
 1
--32
-32
--32
-32
-0
-0
+-25
+25
+-25
+25
+1
+1
 1
 ticks
 30.0
 
 BUTTON
-27
+63
 77
-90
+148
 110
 setup
 setup
@@ -107,10 +117,10 @@ NIL
 1
 
 BUTTON
-110
-78
-173
-111
+65
+240
+128
+273
 go
 go
 T
@@ -124,10 +134,10 @@ NIL
 1
 
 BUTTON
-59
-158
-144
-191
+63
+118
+148
+151
 make wall
 make-obstacle
 T
@@ -141,10 +151,10 @@ NIL
 1
 
 BUTTON
-64
-286
-127
-319
+66
+298
+129
+331
 clear
 clear-display
 NIL
@@ -158,10 +168,10 @@ NIL
 1
 
 BUTTON
-91
-228
-154
-261
+148
+298
+211
+331
 erase
 erase
 T
@@ -173,6 +183,30 @@ NIL
 NIL
 NIL
 1
+
+BUTTON
+63
+161
+148
+194
+set goal
+make-goal
+T
+1
+T
+OBSERVER
+NIL
+NIL
+NIL
+NIL
+1
+
+OUTPUT
+19
+364
+259
+418
+11
 
 @#$#@#$#@
 ## WHAT IS IT?
@@ -360,6 +394,12 @@ Rectangle -7500403 true true 45 120 255 285
 Rectangle -16777216 true false 120 210 180 285
 Polygon -7500403 true true 15 120 150 15 285 120
 Line -16777216 false 30 120 270 120
+
+l
+true
+0
+Rectangle -7500403 true true 45 75 120 225
+Rectangle -7500403 true true 120 75 270 150
 
 leaf
 false
