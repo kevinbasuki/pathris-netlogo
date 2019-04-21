@@ -75,7 +75,7 @@ to go
       set path  A* start goal p-valids final-cost
       set calculate? false
     ]
-    if path != false and not empty? path [
+    if path != false o not empty? path [
       let p first path
       set path remove-item 0 path
       move-to p
