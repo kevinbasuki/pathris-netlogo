@@ -13,6 +13,7 @@ to setup
     set start patch xcor ycor
     set calculate? true
     set heading 0
+    set pen-mode "down"
   ]
 
   ;; Initial values of patches for A*
@@ -176,7 +177,6 @@ end
 to-report heuristic [#goal]
   report distance #goal
 end
-
 @#$#@#$#@
 GRAPHICS-WINDOW
 297
