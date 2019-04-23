@@ -39,6 +39,16 @@ to clear-display
   reset-ticks
 end
 
+to make-boundary
+  ask patches with [
+    pxcor = max-pxcor or
+    pxcor = min-pxcor or
+    pycor = max-pycor or
+    pycor = min-pycor] [
+    set pcolor white
+  ]
+end
+
 to erase
   set button-erase? true
   if button-make? [ set button-make? false stop ]
@@ -226,9 +236,9 @@ NIL
 
 BUTTON
 65
-240
+256
 128
-273
+289
 go
 go
 T
@@ -336,6 +346,23 @@ PENS
 "pen-1" 1.0 0 -13840069 true "" "plot [dist] of turtle 1"
 "pen-2" 1.0 0 -2674135 true "" "plot [dist] of turtle 2"
 "pen-3" 1.0 0 -955883 true "" "plot [dist] of turtle 3"
+
+BUTTON
+66
+203
+151
+236
+boundary
+make-boundary
+NIL
+1
+T
+OBSERVER
+NIL
+NIL
+NIL
+NIL
+1
 
 @#$#@#$#@
 ## WHAT IS IT?
