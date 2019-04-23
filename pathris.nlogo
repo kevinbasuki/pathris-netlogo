@@ -1,5 +1,5 @@
 globals [button-erase? button-make? goal p-valids]
-turtles-own [start final-cost calculate? path]
+turtles-own [start final-cost calculate? path dist]
 patches-own [father cost-path visited? active?]
 
 to setup
@@ -28,6 +28,7 @@ to setup
 
   set button-erase? false
   set button-make? false
+
   reset-ticks
 end
 
@@ -56,7 +57,7 @@ to make-obstacle
     ask patch mouse-xcor mouse-ycor [ set pcolor white ]
     display
   ]
-  ; Se the valid patches (not wall)
+  ; Set the valid patches (not wall)
   set p-valids patches with [pcolor != white]
 
 end
@@ -72,6 +73,7 @@ end
 
 to go
   ask turtles [
+    set dist distance goal
     if calculate? [
       set path  A* start goal p-valids final-cost
       set calculate? false
@@ -308,11 +310,32 @@ NIL
 1
 
 OUTPUT
-19
-364
-259
-418
+159
+74
+291
+205
 11
+
+PLOT
+68
+360
+268
+510
+Distance To Goal
+Time (ticks)
+Distance
+0.0
+10.0
+0.0
+10.0
+true
+false
+"" ""
+PENS
+"default" 1.0 0 -16777216 true "" "plot [dist] of turtle 0"
+"pen-1" 1.0 0 -13840069 true "" "plot [dist] of turtle 1"
+"pen-2" 1.0 0 -2674135 true "" "plot [dist] of turtle 2"
+"pen-3" 1.0 0 -955883 true "" "plot [dist] of turtle 3"
 
 @#$#@#$#@
 ## WHAT IS IT?
