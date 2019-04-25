@@ -47,7 +47,7 @@ to make-boundary
     pycor = min-pycor] [
     set pcolor white
   ]
-  set p-valids patches with [pcolor != white]
+
 end
 
 to erase
@@ -311,6 +311,13 @@ NIL
 NIL
 NIL
 1
+
+OUTPUT
+159
+74
+291
+205
+11
 
 PLOT
 68
